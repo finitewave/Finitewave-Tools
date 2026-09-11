@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "finitewave_tools"
+version = "0.0.1"
+description = "Tools for cardiac electrophysiology modeling with finite-difference methods."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "Arstanbek Okenov", email = "arstanbek.okenov@gmail.com" },
+  { name = "Timur Nezlobinsky", email = "nezlobinsky@gmail.com" },
+]
+keywords = ["cardiac electrophysiology", "finite-difference methods", "simulation"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+  "numpy>=1.26.4",
+  "numba>=0.60.0",
+  "scipy>=1.14.1",
+  "pyamg>=5.2.1",
+  "matplotlib>=3.9.2",
+  "tqdm>=4.66.5",
+  "natsort>=8.4.0",
+  "pyvista>=0.44.1",
+  "ffmpeg-python>=0.2.0",
+  "scikit-image>=0.24.0",
+  "pyamg>=5.3.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/finitewave/Finitewave-Tools"
+Repository = "https://github.com/finitewave/Finitewave-Tools"
+Issues = "https://github.com/finitewave/Finitewave-Tools/issues"
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-cov",
+]
+docs = [
+  "sphinx",
+  "sphinx-rtd-theme",
+  "pydata-sphinx-theme",
+  "sphinx-gallery",
+  "sphinx-copybutton",
+  "numpydoc",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["finitewave_tools"]
