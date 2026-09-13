@@ -1,7 +1,7 @@
 import numpy as np
 import pyamg
 from scipy.sparse.linalg import gmres
-from .linalg import make_system
+from .linalg import make_system, linear_solver
 
 
 def geodesic_distance(K, M, G, elems, elem_sizes, source_ids, t=100, atol=1e-8, 
@@ -9,14 +9,14 @@ def geodesic_distance(K, M, G, elems, elem_sizes, source_ids, t=100, atol=1e-8,
     direction = distance_direction(K, M, G, elems, source_ids, t=t, atol=atol, maxiter=maxiter)
     rhs = assemble_poisson_rhs(K, G, elems, elem_sizes, direction)
 
-    K_reduced, rhs_reduced, x0_reduced, interior_indices = make_system(
+    K_reduced, rhs_reduced, x0, interior_indices = make_system(
         K, b=rhs, dirichlet_conditions=[(source_ids, 0.0)]
     )
-    d = np.zeros(K.shape[0], dtype=float)
-    d[interior_indices] = linear_solver(K_reduced, rhs_reduced, x0=x0_reduced, 
+    x0_reduced = x0[interior_indices]
+    x0[interior_indices] = linear_solver(K_reduced, rhs_reduced, x0=x0_reduced, 
                                         atol=1e-8, maxiter=1000)
     
-    return d
+    return x0
 
 
 def assemble_poisson_rhs(K, G, elems, elem_sizes, direction):
@@ -37,13 +37,3 @@ def distance_direction(K, M, G, elems, source_ids, t=100, atol=1e-8, maxiter=100
     grads = - (G @ u[elems][..., None]).squeeze(-1)
     direction = grads / np.linalg.norm(grads, axis=1)[:, None]
     return direction
-
-
-def linear_solver(A, b, x0=None, **kwargs):
-    ml = pyamg.smoothed_aggregation_solver(A)
-    M_preconditioner = ml.aspreconditioner()
-
-    x, info = gmres(A, b, M=M_preconditioner, x0=x0, **kwargs)
-    if info != 0:
-        raise RuntimeError(f"GMRES did not converge successfully (info={info}).")
-    return x

@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.sparse.linalg import gmres
+import pyamg
 
 
 def make_system(A, b=None, x0=None, dirichlet_conditions=None):
@@ -38,7 +40,17 @@ def make_system(A, b=None, x0=None, dirichlet_conditions=None):
     A_reduced, b_reduced = _build_reduced_system(A, b, x0, interior_indices, 
                                                  dirichlet_indices)
     
-    return A_reduced, b_reduced, x0[interior_indices], interior_indices
+    return A_reduced, b_reduced, x0, interior_indices
+
+
+def linear_solver(A, b, x0=None, **kwargs):
+    ml = pyamg.smoothed_aggregation_solver(A)
+    M_preconditioner = ml.aspreconditioner()
+
+    x, info = gmres(A, b, M=M_preconditioner, x0=x0, **kwargs)
+    if info != 0:
+        raise RuntimeError(f"GMRES did not converge successfully (info={info}).")
+    return x
 
 
 def _find_interior_indices(size, boundary_indices):
