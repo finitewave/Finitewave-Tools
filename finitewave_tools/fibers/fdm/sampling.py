@@ -1,19 +1,19 @@
-
 import numpy as np
-import pyvista as pv
-from vtkmodules.vtkFiltersPoints import vtkPoissonDiskSampler
+from finitewave_tools.meshkit.points.point_sampler import select_random_points
 
 
 def sample_from_layers(layers, coords, radius, n_layers=None):
     """
-    Sample points from each layer with a minimum distance constraint.
+    Sample points with a minimum distance constraint within each layer.
+
+    Points from different layers may be closer than radius.
     
     Parameters:
     -----------
     layers : array-like
-        An array indicating the layer index for each point in `coords`.
+        Integer array of shape (N,) with zero-based layer indices.
     coords : array-like
-        An array of coordinates from which to sample points.
+        Array of shape (N, 3) containing point coordinates.
     radius : float
         The minimum distance between sampled points.
     n_layers : int, optional
@@ -23,7 +23,14 @@ def sample_from_layers(layers, coords, radius, n_layers=None):
     --------
     sampled_indices : array
         Indices of the sampled points in the original `coords` array.
+        An empty integer array is returned when no points are sampled.
     """
+    layers = np.asarray(layers)
+    coords = np.asarray(coords)
+
+    if layers.size == 0:
+        return np.empty(0, dtype=np.intp)
+
     if n_layers is None:
         n_layers = np.max(layers) + 1
 
@@ -39,39 +46,7 @@ def sample_from_layers(layers, coords, radius, n_layers=None):
             layer_indices = full_indices[layer_mask][layer_indices]
             sampled_indices.append(layer_indices)
 
+    if not sampled_indices:
+        return np.empty(0, dtype=np.intp)
+
     return np.concatenate(sampled_indices)
-
-
-def select_random_points(points, distance, seed=12345):
-    """
-    Select random points from a given set of points using Poisson disk sampling.
-
-    Parameters
-    ----------
-    points : numpy.ndarray
-        The input points from which to select random points.
-    distance : float
-        The minimum distance between selected points.
-    seed : int, optional
-        The random seed for reproducibility. Default is 12345.
-
-    Returns
-    -------
-    numpy.ndarray
-        The indices of the selected random points in the original array.
-    """
-    points = np.asarray(points, dtype=np.float64)
-    rng = np.random.default_rng(seed)
-    shuffled_indices = rng.permutation(points.shape[0])
-    shuffled_coords = points[shuffled_indices]
-    poly = pv.PolyData(shuffled_coords)
-    poly["original_indices"] = shuffled_indices
-
-    # Assign the random sequence to the sampler
-    points_sampler = vtkPoissonDiskSampler()
-    points_sampler.SetRadius(distance)
-    points_sampler.SetInputData(poly)
-    # points_sampler.SetLocator()
-    points_sampler.Update()
-    out = pv.wrap(points_sampler.GetOutput())
-    return np.array(out["original_indices"])

@@ -19,6 +19,22 @@ def make_system(A, b=None, x0=None, dirichlet_conditions=None):
     dirichlet_conditions : list of tuples, optional
         Each tuple contains an array of node indices and their prescribed
         value or values. Defaults to no prescribed nodes.
+    
+    Returns
+    -------
+    A_reduced : scipy.sparse matrix
+        The reduced stiffness matrix after applying Dirichlet conditions.
+    b_reduced : numpy.ndarray
+        The reduced load vector after applying Dirichlet conditions.
+    x0 : numpy.ndarray
+        The solution vector with Dirichlet values applied.
+    interior_indices : numpy.ndarray
+        The indices of the interior nodes (not on the Dirichlet boundary).
+
+    Notes
+    -----
+    The x0 vector is modified in place to include the Dirichlet values. And
+    ``A_reduced.shape[0] == b_reduced.shape[0] != x0.shape[0]``.
 
     """
     if dirichlet_conditions is None:
@@ -44,6 +60,25 @@ def make_system(A, b=None, x0=None, dirichlet_conditions=None):
 
 
 def linear_solver(A, b, x0=None, **kwargs):
+    """
+    Solve the linear system Ax = b using GMRES with an AMG preconditioner.
+
+    Parameters
+    ----------
+    A : scipy.sparse matrix
+        The stiffness matrix of the system.
+    b : numpy.ndarray
+        The right-hand side vector of the system.
+    x0 : numpy.ndarray, optional
+        The initial guess for the solution. Defaults to zero.
+    **kwargs
+        Additional keyword arguments to pass to the GMRES solver.
+
+    Returns
+    -------
+    x : numpy.ndarray
+        The solution vector.
+    """
     ml = pyamg.smoothed_aggregation_solver(A)
     M_preconditioner = ml.aspreconditioner()
 

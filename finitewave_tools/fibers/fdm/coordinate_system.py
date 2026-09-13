@@ -1,5 +1,5 @@
 import numpy as np
-from finitewave_tools.fibers.fdm.gradient import normalize_vectors
+from finitewave_tools.fibers.vectors import normalize_vectors
 
 
 def build_coord_system(e0, e1):
