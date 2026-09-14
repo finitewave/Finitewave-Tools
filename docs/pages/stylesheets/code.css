@@ -1,0 +1,87 @@
+/* Shared Pygments palette for Markdown and nbconvert notebook code. */
+[data-md-color-scheme="default"] {
+  --md-code-fg-color: #273449;
+  --md-code-bg-color: #f5f7fc;
+  --md-code-hl-keyword-color: #7338b8;
+  --md-code-hl-function-color: #165da8;
+  --md-code-hl-string-color: #087443;
+  --md-code-hl-number-color: #a74a12;
+  --md-code-hl-constant-color: #a74a12;
+  --md-code-hl-operator-color: #a02d64;
+  --md-code-hl-comment-color: #5d6c7e;
+  --md-code-hl-name-color: #273449;
+  --md-code-hl-punctuation-color: #45556c;
+  --md-code-hl-special-color: #a02d64;
+  --md-code-hl-generic-color: #165da8;
+  --md-code-hl-variable-color: #273449;
+}
+
+.md-typeset :is(.highlight, .highlight-ipynb) pre {
+  color: var(--md-code-fg-color);
+  background: var(--md-code-bg-color);
+  line-height: 1.6;
+}
+
+/* Notebook input frames keep their own layout and use the shared background. */
+.md-typeset .jp-InputArea-editor {
+  background: var(--md-code-bg-color);
+  border: 1px solid #dde3ef;
+  border-left: 3px solid #9180c0;
+  border-radius: 0.3rem;
+}
+
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .ow) {
+  color: var(--md-code-hl-keyword-color);
+  font-weight: 600;
+}
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.nf, .fm, .nc, .nn, .ne, .nd) {
+  color: var(--md-code-hl-function-color);
+}
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.nb, .bp) { color: #006e7a; }
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .sh, .sx, .sr, .ss) {
+  color: var(--md-code-hl-string-color);
+}
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.se, .si) { color: var(--md-code-hl-special-color); }
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .no) {
+  color: var(--md-code-hl-number-color);
+}
+.md-typeset :is(.highlight, .highlight-ipynb) .o { color: var(--md-code-hl-operator-color); }
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.c, .c1, .ch, .cm, .cp, .cpf, .cs) {
+  color: var(--md-code-hl-comment-color);
+  font-style: italic;
+}
+.md-typeset :is(.highlight, .highlight-ipynb) :is(.n, .na, .nv, .vc, .vg, .vi, .vm) {
+  color: var(--md-code-hl-name-color);
+}
+.md-typeset :is(.highlight, .highlight-ipynb) .p { color: var(--md-code-hl-punctuation-color); }
+.md-typeset :is(.highlight, .highlight-ipynb) .w { color: inherit; }
+
+/* Space for 100 columns on wide displays; scroll rather than wrap long lines. */
+/* Center navigation and article together instead of spreading across the screen. */
+.md-grid { max-width: 70rem; }
+.md-content { min-width: 0; }
+.md-typeset :is(.highlight, .highlight-ipynb) {
+  font-family: var(--md-code-font-family);
+  font-size: 0.7rem;
+  max-width: 100ch;
+}
+.md-typeset :is(.highlight, .highlight-ipynb) pre {
+  white-space: pre;
+  overflow-x: auto;
+}
+.md-typeset .highlight pre > code { white-space: pre; }
+.md-typeset .jp-InputArea-editor { min-width: 0; }
+
+@media (min-width: 76.25em) {
+  .md-sidebar--primary { width: 12rem; }
+  .md-sidebar--secondary { width: 10rem; }
+  .md-content { max-width: 50rem; }
+}
+
+/* Limit prose independently of code and figures, including notebook Markdown. */
+.md-typeset { --prose-width: 68ch; }
+.md-typeset > :is(p, ul, ol, blockquote),
+.md-typeset .jp-MarkdownOutput :is(p, ul, ol, blockquote) {
+  max-width: var(--prose-width);
+  overflow-wrap: break-word;
+}

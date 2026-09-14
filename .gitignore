@@ -208,3 +208,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# MkDocs generated site
+/site/
+
+# Documentation build output
+/docs/site/

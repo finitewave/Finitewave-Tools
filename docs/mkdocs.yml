@@ -1,0 +1,77 @@
+site_name: Finitewave-Tools
+site_description: Tutorials for cardiac mesh preparation, visualization, and analysis.
+site_url: https://finitewave.github.io/Finitewave-Tools/
+repo_url: https://github.com/finitewave/Finitewave-Tools
+repo_name: finitewave/Finitewave-Tools
+docs_dir: pages
+site_dir: site
+use_directory_urls: true
+
+hooks:
+  - hooks/tutorials.py
+
+watch:
+  - ../Tutorials
+
+nav:
+  - Start here: index.md
+  - Tutorials:
+      - Plotting and animation: Plot and Animation.ipynb
+      - Left ventricle fibers: Left Ventricle Fibers.ipynb
+      - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
+  - Papers: papers.md
+
+  - Contributing tutorials: contributing.md
+
+# Keep data and videos at their notebook-relative paths. Exclude unfinished
+# notebooks until they contain publishable content.
+exclude_docs: |
+  /.ipynb_checkpoints/
+  /Lead Field Electrograms.ipynb
+  /Spiral Wave Core 2D.ipynb
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  font: false
+  palette:
+    scheme: default
+    primary: teal
+    accent: deep purple
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+extra_css:
+  - stylesheets/colorful.css
+  - stylesheets/code.css
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      include: ['*.ipynb']
+      ignore:
+        - 'Lead Field Electrograms.ipynb'
+        - 'Spiral Wave Core 2D.ipynb'
+      execute: false
+      include_source: true
+      show_input: true
+      ignore_h1_titles: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences

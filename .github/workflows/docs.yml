@@ -1,0 +1,35 @@
+name: Build documentation
+
+on:
+  pull_request:
+    paths:
+      - 'Tutorials/**'
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
+  push:
+    paths:
+      - 'Tutorials/**'
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: docs/requirements.txt
+      - run: python -m pip install -r docs/requirements.txt
+      - run: python -m mkdocs build --strict -f docs/mkdocs.yml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: documentation-site
+          path: docs/site/
+          if-no-files-found: error

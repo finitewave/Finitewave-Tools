@@ -1,0 +1,76 @@
+/* Colorful accents with neutral reading and notebook output surfaces. */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #00695c;
+  --md-primary-fg-color--light: #008577;
+  --md-primary-fg-color--dark: #004d40;
+  --md-accent-fg-color: #6d28d9;
+  --md-typeset-a-color: #00695c;
+  --md-code-bg-color: #f4f6fb;
+}
+
+.md-header {
+  background: linear-gradient(110deg, #00695c, #12678a 65%, #51429b);
+}
+
+.md-typeset h1 {
+  color: #174f65;
+  font-weight: 650;
+}
+
+.md-typeset h2 {
+  border-bottom: 2px solid #b7e3df;
+  padding-bottom: 0.3em;
+}
+
+.md-typeset a:hover { color: #6d28d9; }
+
+.md-nav__link--active {
+  color: #00695c;
+  font-weight: 700;
+}
+
+.md-nav--primary .md-nav__link--active {
+  background: #e7f5f2;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.45rem;
+}
+
+.md-typeset .md-button {
+  color: #00695c;
+  background: #e7f5f2;
+  border-color: #00695c;
+  border-radius: 0.35rem;
+}
+
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus {
+  color: #fff;
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.md-typeset table:not([class]) {
+  border-color: #cfe4e4;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  color: #fff;
+  background: #176276;
+}
+
+.md-typeset table:not([class]) tbody tr:nth-child(3n + 1) { background: #eff9f6; }
+.md-typeset table:not([class]) tbody tr:nth-child(3n + 2) { background: #f0f5fc; }
+.md-typeset table:not([class]) tbody tr:nth-child(3n) { background: #f7f2fc; }
+
+.md-typeset pre > code {
+  border-left: 3px solid #9b8ac4;
+  border-radius: 0.25rem;
+}
+
+/* Notebook headings use nbconvert styles rather than Markdown styles. */
+.md-typeset .jp-RenderedHTMLCommon h1 { color: #174f65; }
+.md-typeset .jp-RenderedHTMLCommon h2 { border-bottom-color: #b7e3df; }
+
+:focus-visible { outline: 2px solid #6d28d9; outline-offset: 3px; }

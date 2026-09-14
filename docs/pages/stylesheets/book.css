@@ -1,0 +1,49 @@
+/* Light scientific documentation layout, inspired by book-style docs. */
+:root {
+  --md-text-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --md-code-font: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --md-primary-fg-color: #ffffff;
+  --md-primary-bg-color: #263238;
+  --md-default-fg-color: #29313d;
+  --md-default-fg-color--light: #566171;
+  --md-typeset-a-color: #2368a2;
+  --md-accent-fg-color: #17568b;
+  --md-code-bg-color: #f5f6f8;
+}
+
+.md-header {
+  border-bottom: 1px solid #e3e6eb;
+  box-shadow: none;
+}
+
+.md-header__title { font-weight: 600; }
+.md-grid { max-width: 76rem; }
+.md-typeset { font-size: 0.82rem; line-height: 1.7; }
+.md-typeset h1 { color: #222b36; font-weight: 650; letter-spacing: -0.025em; }
+.md-typeset h2 { font-weight: 600; letter-spacing: -0.015em; }
+.md-typeset h3 { font-weight: 600; }
+.md-typeset pre > code { border: 1px solid #e4e7ec; border-radius: 0.3rem; }
+.md-typeset img, .md-typeset video { max-width: 100%; height: auto; }
+
+.md-nav { font-size: 0.73rem; }
+.md-nav__link { line-height: 1.5; }
+.md-nav__link--active { font-weight: 650; }
+.md-nav--secondary { border-left: 1px solid #e3e6eb; padding-left: 0.7rem; }
+
+.md-typeset .notebook-download {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid #d9dfe6;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* Keep notebook text aligned with the surrounding documentation. */
+.md-typeset .jp-RenderedHTMLCommon { font-family: var(--md-text-font); line-height: 1.7; }
+.md-typeset .jp-RenderedHTMLCommon p { line-height: 1.7; }
+
+@media (min-width: 76.25em) {
+  .md-sidebar--primary { border-right: 1px solid #e3e6eb; }
+  .md-content { min-width: 0; }
+  .md-content__inner { margin-right: 1.5rem; margin-left: 1.5rem; }
+}
