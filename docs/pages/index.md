@@ -11,6 +11,7 @@ code, and saved figures or animations.
 | [Plotting and animation](<Plot and Animation.ipynb>) | Convert tissue and element meshes into PyVista grids, assign scalar values, and export animations. |
 | [Left ventricle fibers](<Left Ventricle Fibers.ipynb>) | Generate myocardial fiber directions using Laplace fields and local anatomical axes. |
 | [Atrial tachycardia ablation](<Atrial Tachycardia Ablation.ipynb>) | Explore wave propagation and the effect of ablation lines in an atrial model. |
+| [Lead field electrograms](<Lead Field Electrograms.ipynb>) | Construct electrode patches, solve for lead-field weights, and calculate a bipolar electrogram during cardiac excitation. |
 
 Start with **Plotting and animation** to become familiar with the visualization
 objects used throughout the examples.
@@ -45,5 +46,4 @@ it does not run Python or simulations in your browser.
 
 ## Planned tutorials
 
-Spiral Wave Core 2D and Lead Field Electrograms are placeholders and will be
-included when their notebooks are ready.
+Spiral Wave Core 2D is a placeholder and will be included when its notebook is ready.

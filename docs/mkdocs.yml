@@ -19,6 +19,7 @@ nav:
       - Plotting and animation: Plot and Animation.ipynb
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
+      - Lead field electrograms: Lead Field Electrograms.ipynb
   - Papers: papers.md
 
   - Contributing tutorials: contributing.md
@@ -27,7 +28,6 @@ nav:
 # notebooks until they contain publishable content.
 exclude_docs: |
   /.ipynb_checkpoints/
-  /Lead Field Electrograms.ipynb
   /Spiral Wave Core 2D.ipynb
 
 theme:
@@ -51,12 +51,15 @@ extra_css:
   - stylesheets/colorful.css
   - stylesheets/code.css
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
 plugins:
   - search
   - mkdocs-jupyter:
       include: ['*.ipynb']
       ignore:
-        - 'Lead Field Electrograms.ipynb'
         - 'Spiral Wave Core 2D.ipynb'
       execute: false
       include_source: true
@@ -64,6 +67,8 @@ plugins:
       ignore_h1_titles: true
 
 markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
   - admonition
   - attr_list
   - md_in_html
