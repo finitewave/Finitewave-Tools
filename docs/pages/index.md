@@ -12,6 +12,7 @@ code, and saved figures or animations.
 | [Left ventricle fibers](<Left Ventricle Fibers.ipynb>) | Generate myocardial fiber directions using Laplace fields and local anatomical axes. |
 | [Atrial tachycardia ablation](<Atrial Tachycardia Ablation.ipynb>) | Explore wave propagation and the effect of ablation lines in an atrial model. |
 | [Lead field electrograms](<Lead Field Electrograms.ipynb>) | Construct electrode patches, solve for lead-field weights, and calculate a bipolar electrogram during cardiac excitation. |
+| [LAT-based electrograms](<LAT based Electrograms.ipynb>) | Calculate electrograms from local activation times, an action potential template, and electrode lead fields. |
 
 Start with **Plotting and animation** to become familiar with the visualization
 objects used throughout the examples.

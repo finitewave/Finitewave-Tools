@@ -20,6 +20,7 @@ nav:
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
       - Lead field electrograms: Lead Field Electrograms.ipynb
+      - LAT-based electrograms: LAT based Electrograms.ipynb
   - Papers: papers.md
 
   - Contributing tutorials: contributing.md
@@ -29,6 +30,7 @@ nav:
 exclude_docs: |
   /.ipynb_checkpoints/
   /Spiral Wave Core 2D.ipynb
+  /Effect of Grid Spacing and Element Size.ipynb
 
 theme:
   name: material
@@ -61,6 +63,7 @@ plugins:
       include: ['*.ipynb']
       ignore:
         - 'Spiral Wave Core 2D.ipynb'
+        - 'Effect of Grid Spacing and Element Size.ipynb'
       execute: false
       include_source: true
       show_input: true
