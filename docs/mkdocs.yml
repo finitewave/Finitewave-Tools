@@ -21,6 +21,7 @@ nav:
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
       - Lead field electrograms: Lead Field Electrograms.ipynb
       - LAT-based electrograms: LAT based Electrograms.ipynb
+      - LAT interpolation with PINN: LAT Interpolation with PINN.ipynb
   - Papers: papers.md
 
   - Contributing tutorials: contributing.md
