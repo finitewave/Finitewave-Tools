@@ -62,7 +62,7 @@
 .md-content { min-width: 0; }
 .md-typeset :is(.highlight, .highlight-ipynb) {
   font-family: var(--md-code-font-family);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   max-width: 100ch;
 }
 .md-typeset :is(.highlight, .highlight-ipynb) pre {

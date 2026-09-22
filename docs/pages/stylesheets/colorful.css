@@ -74,3 +74,38 @@
 .md-typeset .jp-RenderedHTMLCommon h2 { border-bottom-color: #b7e3df; }
 
 :focus-visible { outline: 2px solid #6d28d9; outline-offset: 3px; }
+
+/* Compact article typography, including notebook-rendered prose. */
+.md-typeset {
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.md-typeset .jp-Notebook {
+  --jp-content-font-size1: 0.75rem;
+  --jp-code-font-size: 0.65rem;
+}
+
+.md-typeset .jp-RenderedHTMLCommon {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Navigation links */
+.md-nav--primary .md-nav__link {
+  color: black;
+}
+
+.md-nav--primary .md-nav__link:hover,
+.md-nav--primary .md-nav__link:focus {
+  color: #f57c00;
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav__link {
+  color: #6d28d9;
+  font-weight: 700;
+}
+
+.md-nav--primary .md-nav__item--section > .md-nav__link:hover {
+  color: #f57c00;
+}

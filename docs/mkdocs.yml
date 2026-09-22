@@ -15,14 +15,17 @@ watch:
 
 nav:
   - Start here: index.md
-  - Tutorials:
+  - Mesh:
       - Plotting and animation: Plot and Animation.ipynb
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
+  - Electrophysiology:
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
+  - Electrograms:
       - Lead field electrograms: Lead Field Electrograms.ipynb
       - LAT-based electrograms: LAT based Electrograms.ipynb
+  - Neural Networks:
       - LAT interpolation with PINN: LAT Interpolation with PINN.ipynb
-  - Papers: papers.md
+      - Fiber estimation with PINN: Fiber Estimation with PINN.ipynb
 
   - Contributing tutorials: contributing.md
 
@@ -46,6 +49,7 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - toc.follow
     - content.code.copy
     - search.suggest
     - search.highlight
@@ -69,6 +73,7 @@ plugins:
       include_source: true
       show_input: true
       ignore_h1_titles: true
+      toc_depth: 3  # Section and subsection headings (H2/H3).
 
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -78,6 +83,7 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
+      toc_depth: "2-3"
   - pymdownx.details
   - pymdownx.highlight:
       use_pygments: true

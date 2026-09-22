@@ -14,6 +14,7 @@ code, and saved figures or animations.
 | [Lead field electrograms](<Lead Field Electrograms.ipynb>) | Construct electrode patches, solve for lead-field weights, and calculate a bipolar electrogram during cardiac excitation. |
 | [LAT-based electrograms](<LAT based Electrograms.ipynb>) | Calculate electrograms from local activation times, an action potential template, and electrode lead fields. |
 | [LAT interpolation with PINN](<LAT Interpolation with PINN.ipynb>) | Reconstruct activation times and conduction speed from sparse LAT samples using surface eigenfunctions and an eikonal constraint. |
+| [Fiber estimation with PINN](<Fiber Estimation with PINN.ipynb>) | Infer fiber orientation and longitudinal and transverse conduction speeds from multiple activation maps using an anisotropic eikonal constraint. |
 
 Start with **Plotting and animation** to become familiar with the visualization
 objects used throughout the examples.

@@ -159,7 +159,7 @@ def _set_dirichlet_values(x, dirichlet_conditions):
     if len(dirichlet_conditions) == 0:
         return np.array([], dtype=int)
 
-    dirichlet_indices = np.concatenate([index for index, _ in dirichlet_conditions], dtype=int)
+    dirichlet_indices = np.concatenate([np.atleast_1d(index) for index, _ in dirichlet_conditions], dtype=int)
 
     if not _has_unique_indices(dirichlet_indices):
         raise ValueError("Duplicate Dirichlet boundary indices found.")
