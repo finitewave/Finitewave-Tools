@@ -20,6 +20,7 @@ nav:
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
   - Electrophysiology:
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
+      - Phase mapping: Phase Mapping.ipynb
   - Electrograms:
       - Lead field electrograms: Lead Field Electrograms.ipynb
       - LAT-based electrograms: LAT based Electrograms.ipynb
@@ -40,7 +41,9 @@ theme:
   name: material
   custom_dir: overrides
   language: en
-  font: false
+  font:
+    text: false
+    code: JetBrains Mono
   palette:
     scheme: default
     primary: teal

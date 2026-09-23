@@ -91,6 +91,12 @@
   line-height: 1.6;
 }
 
+/* Hide Jupyter cell execution prompts such as In [1]: and Out [1]:. */
+.md-typeset .jp-InputPrompt,
+.md-typeset .jp-OutputPrompt {
+  display: none !important;
+}
+
 /* Navigation links */
 .md-nav--primary .md-nav__link {
   color: black;

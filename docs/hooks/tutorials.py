@@ -2,9 +2,19 @@
 
 from copy import copy
 from pathlib import Path
+import re
 
 from mkdocs.plugins import event_priority
 from mkdocs.structure.files import get_files
+
+
+def on_page_content(html, **kwargs):
+    """Give CamelCase class references the same token as class declarations."""
+    return re.sub(
+        r'<span class="(?:n|na|nn)">([A-Z][A-Za-z0-9_]*[a-z][A-Za-z0-9_]*)</span>',
+        r'<span class="nc">\1</span>',
+        html,
+    )
 
 
 @event_priority(100)
