@@ -75,6 +75,50 @@
 
 :focus-visible { outline: 2px solid #6d28d9; outline-offset: 3px; }
 
+/* Tutorial categories on the Getting started page. */
+.md-typeset .tutorial-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.md-typeset .tutorial-group {
+  min-width: 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid #cfe4e4;
+  border-top: 4px solid #008577;
+  border-radius: 0.5rem;
+  background: #f3faf8;
+}
+
+.md-typeset .tutorial-group:nth-child(2) {
+  border-top-color: #12678a;
+  background: #f0f6fc;
+}
+
+.md-typeset .tutorial-group:nth-child(3) {
+  border-top-color: #8c5a22;
+  background: #fcf7ef;
+}
+
+.md-typeset .tutorial-group:nth-child(4) {
+  border-top-color: #7860a3;
+  background: #f7f3fc;
+}
+
+.md-typeset .tutorial-group h3 {
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.md-typeset .tutorial-group > :last-child { margin-bottom: 0; }
+.md-typeset .tutorial-group li a { font-weight: 600; }
+
+@media (max-width: 600px) {
+  .md-typeset .tutorial-groups { grid-template-columns: 1fr; }
+}
+
 /* Compact article typography, including notebook-rendered prose. */
 .md-typeset {
   font-size: 0.8rem;
@@ -97,13 +141,33 @@
   display: none !important;
 }
 
+/* Sidebar headings match the notebook title color. */
+@media (min-width: 76.25em) {
+  .md-nav--primary > .md-nav__title {
+    color: #174f65;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+}
+
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title {
+  color: #174f65;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
 /* Navigation links */
-.md-nav--primary .md-nav__link {
+.md-nav--primary .md-nav__link,
+.md-nav--secondary .md-nav__link {
   color: black;
 }
 
 .md-nav--primary .md-nav__link:hover,
-.md-nav--primary .md-nav__link:focus {
+.md-nav--primary .md-nav__link:focus,
+.md-nav--secondary .md-nav__link:hover,
+.md-nav--secondary .md-nav__link:focus {
   color: #f57c00;
 }
 

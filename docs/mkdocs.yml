@@ -14,11 +14,12 @@ watch:
   - ../Tutorials
 
 nav:
-  - Start here: index.md
+  - Getting started: index.md
   - Mesh:
       - Plotting and animation: Plot and Animation.ipynb
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
   - Electrophysiology:
+      - Spiral wave termination: Spiral Wave Termination.ipynb
       - Alternans and spiral breakup: Alternans and Spiral Breakup.ipynb
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
       - Phase mapping: Phase Mapping.ipynb

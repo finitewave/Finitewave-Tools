@@ -1,28 +1,71 @@
-# Finitewave-Tools tutorials
+# Getting started
 
-Learn to prepare cardiac meshes, visualize scalar fields, and explore simulation
-results with worked Jupyter notebooks. Each tutorial combines explanation, Python
-code, and saved figures or animations.
+Explore cardiac modeling with Finitewave-Tools through four tutorial groups: mesh
+preparation and visualization, electrophysiology, electrograms, and neural networks.
+Each notebook brings together a short explanation, runnable code, and saved results.
 
-## Choose a tutorial
+Browse the tutorials online, or run them locally to explore your own experiments.
 
-| Tutorial | What you will learn |
-| --- | --- |
-| [Plotting and animation](<Plot and Animation.ipynb>) | Convert tissue and element meshes into PyVista grids, assign scalar values, and export animations. |
-| [Left ventricle fibers](<Left Ventricle Fibers.ipynb>) | Generate myocardial fiber directions using Laplace fields and local anatomical axes. |
-| [Alternans and spiral breakup](<Alternans and Spiral Breakup.ipynb>) | Explore action potential restitution, alternans, and the role of sodium recovery in spiral-wave stability. |
-| [Atrial tachycardia ablation](<Atrial Tachycardia Ablation.ipynb>) | Explore wave propagation and the effect of ablation lines in an atrial model. |
-| [Lead field electrograms](<Lead Field Electrograms.ipynb>) | Construct electrode patches, solve for lead-field weights, and calculate a bipolar electrogram during cardiac excitation. |
-| [LAT-based electrograms](<LAT based Electrograms.ipynb>) | Calculate electrograms from local activation times, an action potential template, and electrode lead fields. |
-| [LAT interpolation with PINN](<LAT Interpolation with PINN.ipynb>) | Reconstruct activation times and conduction speed from sparse LAT samples using surface eigenfunctions and an eikonal constraint. |
-| [Fiber estimation with PINN](<Fiber Estimation with PINN.ipynb>) | Infer fiber orientation and longitudinal and transverse conduction speeds from multiple activation maps using an anisotropic eikonal constraint. |
+## Explore the tutorials
 
-Start with **Plotting and animation** to become familiar with the visualization
-objects used throughout the examples.
+<div class="tutorial-groups" markdown>
+
+<div class="tutorial-group" markdown>
+
+### Mesh
+
+Prepare tissue geometry and bring simulation results into view.
+
+- [Plotting and animation](<Plot and Animation.ipynb>)
+- [Left ventricle fibers](<Left Ventricle Fibers.ipynb>)
+
+</div>
+
+<div class="tutorial-group" markdown>
+
+### Electrophysiology
+
+Explore how cardiac waves form, evolve, and respond to interventions.
+
+- [Spiral wave termination](<Spiral Wave Termination.ipynb>)
+- [Alternans and spiral breakup](<Alternans and Spiral Breakup.ipynb>)
+- [Atrial tachycardia ablation](<Atrial Tachycardia Ablation.ipynb>)
+- [Phase mapping](<Phase Mapping.ipynb>)
+
+</div>
+
+<div class="tutorial-group" markdown>
+
+### Electrograms
+
+Connect tissue activation to the signals recorded by electrodes.
+
+- [Lead field electrograms](<Lead Field Electrograms.ipynb>)
+- [LAT-based electrograms](<LAT based Electrograms.ipynb>)
+
+</div>
+
+<div class="tutorial-group" markdown>
+
+### Neural Networks
+
+Use physics-informed learning to recover information from sparse observations.
+
+- [LAT interpolation with PINN](<LAT Interpolation with PINN.ipynb>)
+- [Fiber estimation with PINN](<Fiber Estimation with PINN.ipynb>)
+
+</div>
+
+</div>
+
+New to Finitewave-Tools? Begin with [Plotting and animation](<Plot and Animation.ipynb>)
+to learn how to view meshes and animate simulation results, then choose a group
+that matches your interests.
 
 ## Run the notebooks locally
 
-Clone the repository so the notebooks and their companion data stay together:
+Clone the repository to keep the notebooks and their accompanying data together,
+then create a Python environment:
 
 ```bash
 git clone https://github.com/finitewave/Finitewave-Tools.git
@@ -31,23 +74,25 @@ python -m venv .venv
 ```
 
 Activate the environment with `source .venv/bin/activate` on macOS/Linux, or
-`.venv\Scripts\Activate.ps1` in Windows PowerShell, then install:
+`.venv\Scripts\Activate.ps1` in Windows PowerShell, then install Finitewave-Tools and JupyterLab:
 
 ```bash
 python -m pip install -e .
-python -m pip install jupyterlab av imageio
+python -m pip install jupyterlab
 cd Tutorials
 jupyter lab
 ```
 
-Run notebook cells in order. Their relative paths assume `Tutorials/` is the
-working directory. Some examples also require Finitewave or other packages;
-follow the imports and setup instructions in the selected notebook.
+Open a notebook in JupyterLab and run its cells in order, using `Tutorials/` as
+the working directory so relative data paths resolve correctly. Simulation
+examples also require Finitewave; check the selected notebook for additional
+packages and setup instructions.
 
-The **Download notebook** link provides the notebook alone. Obtain its companion
-`data/` files from the repository as well. The website displays saved outputs;
-it does not run Python or simulations in your browser.
+On the website, figures and animations show saved results. To change parameters
+or run a simulation, use a local notebook. If you use **Download notebook**, also
+obtain any accompanying data files from the repository.
 
 ## Planned tutorials
 
-Spiral Wave Core 2D is a placeholder and will be included when its notebook is ready.
+A tutorial on tracking spiral-wave cores in 2D is planned and will appear here
+when it is ready.

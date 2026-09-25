@@ -1,7 +1,7 @@
 """Export RGB frame sequences as MP4 videos or animated GIF files."""
 
 from pathlib import Path
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import av
 
 

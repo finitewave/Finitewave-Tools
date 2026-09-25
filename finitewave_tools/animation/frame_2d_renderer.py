@@ -70,6 +70,7 @@ class Frame2DRenderer:
         self._grid_shape = mesh.shape
         self.width = mesh.shape[1] * upscale_factor
         self.height = mesh.shape[0] * upscale_factor
+        self.upscale_factor = upscale_factor
 
     def collect_files(self, path):
         """Return naturally sorted .npy paths and their count."""
@@ -79,8 +80,7 @@ class Frame2DRenderer:
         return files, len(files)
 
     def render_frame(self, frame_index, clim=(0, 1), cmap="viridis",
-                     nan_color="black", output_mask=None, nan_mask=None,
-                     upscale_factor=1):
+                     nan_color="black", output_mask=None, nan_mask=None):
         """Render a single frame as an RGB array.
 
         Parameters
@@ -93,6 +93,10 @@ class Frame2DRenderer:
             Name of a Matplotlib colormap to use.
         nan_color : str or tuple, optional
             Color for nonfinite values, masked cells, and values outside ``clim``.
+        output_mask : ndarray, optional
+            Boolean array indicating which entries to restore from a packed frame.
+        nan_mask : ndarray, optional
+            Boolean array indicating which entries to mask as NaN.
 
         Returns
         -------
@@ -104,14 +108,14 @@ class Frame2DRenderer:
 
         frame = self._load_frame(frame_index)
 
-        if nan_mask is not None:
-            frame = self._mask_frame(frame, nan_mask)
-
         if output_mask is not None:
             frame = self._restore_frame(frame, output_mask)
 
-        if upscale_factor > 1:
-            frame = self._upscale_frame(frame, upscale_factor)
+        if nan_mask is not None:
+            frame = self._mask_frame(frame, nan_mask)
+
+        if self.upscale_factor > 1:
+            frame = self._upscale_frame(frame, self.upscale_factor)
 
         if frame.shape != (self.height, self.width):
             raise ValueError("Frame shape must match the configured grid.")
@@ -133,7 +137,7 @@ class Frame2DRenderer:
 
     def setup_cmap(self, cmap, nan_color="black"):
         """Configure a private colormap without changing a caller's colormap."""
-        return plt.get_cmap(cmap).with_extremes(bad=nan_color)
+        return plt.get_cmap(cmap).with_extremes(bad=nan_color, under=nan_color, over=nan_color)
 
     def _load_frame(self, frame_index):
         if self.frames is None and self.frame_paths is None:
@@ -207,9 +211,9 @@ class Frame2DRenderer:
         ndarray
             An array with the specified entries set to NaN.
         """
-        frame = np.asarray(frame, dtype=np.result_type(frame.dtype, np.float32))
+        frame = np.array(frame, dtype=np.result_type(frame.dtype, np.float32))
 
-        if nan_mask is not None:
+        if nan_mask is None:
             return frame
         
         nan_mask = np.asarray(nan_mask, dtype=bool)
@@ -230,9 +234,11 @@ class Frame2DRenderer:
 
     def _to_rgb(self, frame, clim, cmap):
         limits = np.asarray(clim, dtype=float)
+        
         if (limits.shape != (2,) or not np.all(np.isfinite(limits))
                 or limits[0] >= limits[1]):
             raise ValueError("clim must contain two finite, increasing values.")
+        
         frame = np.asarray(frame, dtype=float)
         mask = ~np.isfinite(frame) | (frame < limits[0]) | (frame > limits[1])
         normalized = (frame - limits[0]) / (limits[1] - limits[0])
