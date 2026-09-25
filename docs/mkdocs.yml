@@ -19,6 +19,7 @@ nav:
       - Plotting and animation: Plot and Animation.ipynb
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
   - Electrophysiology:
+      - Alternans and spiral breakup: Alternans and Spiral Breakup.ipynb
       - Atrial tachycardia ablation: Atrial Tachycardia Ablation.ipynb
       - Phase mapping: Phase Mapping.ipynb
   - Electrograms:

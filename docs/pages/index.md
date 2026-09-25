@@ -10,6 +10,7 @@ code, and saved figures or animations.
 | --- | --- |
 | [Plotting and animation](<Plot and Animation.ipynb>) | Convert tissue and element meshes into PyVista grids, assign scalar values, and export animations. |
 | [Left ventricle fibers](<Left Ventricle Fibers.ipynb>) | Generate myocardial fiber directions using Laplace fields and local anatomical axes. |
+| [Alternans and spiral breakup](<Alternans and Spiral Breakup.ipynb>) | Explore action potential restitution, alternans, and the role of sodium recovery in spiral-wave stability. |
 | [Atrial tachycardia ablation](<Atrial Tachycardia Ablation.ipynb>) | Explore wave propagation and the effect of ablation lines in an atrial model. |
 | [Lead field electrograms](<Lead Field Electrograms.ipynb>) | Construct electrode patches, solve for lead-field weights, and calculate a bipolar electrogram during cardiac excitation. |
 | [LAT-based electrograms](<LAT based Electrograms.ipynb>) | Calculate electrograms from local activation times, an action potential template, and electrode lead fields. |
