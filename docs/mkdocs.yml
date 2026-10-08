@@ -27,7 +27,7 @@ nav:
       - Lead field electrograms: Lead Field Electrograms.ipynb
       - LAT-based electrograms: LAT based Electrograms.ipynb
   - Neural Networks:
-      - LAT interpolation with PINN: LAT Interpolation with PINN.ipynb
+      - Conduction velocity estimation with PINN: Conduction Velocity Estimation with PINN.ipynb
       - Fiber estimation with PINN: Fiber Estimation with PINN.ipynb
 
   - Contributing tutorials: contributing.md

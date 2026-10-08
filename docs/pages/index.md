@@ -51,7 +51,7 @@ Connect tissue activation to the signals recorded by electrodes.
 
 Use physics-informed learning to recover information from sparse observations.
 
-- [LAT interpolation with PINN](<LAT Interpolation with PINN.ipynb>)
+- [Conduction velocity estimation with PINN](<Conduction Velocity Estimation with PINN.ipynb>)
 - [Fiber estimation with PINN](<Fiber Estimation with PINN.ipynb>)
 
 </div>
