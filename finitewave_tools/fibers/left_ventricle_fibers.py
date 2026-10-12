@@ -1,9 +1,9 @@
 
 import numpy as np
-from finitewave_tools.fibers.vectors import normalize_vectors
+from finitewave_tools.geometry.vectors import normalize_vectors
  
 
-def rule_based_fibers(el, et, ec, alpha, beta):
+def left_ventricle_fibers(el, et, ec, alpha, beta):
     """Construct unit fiber directions from a local basis and two angles.
 
     Parameters
@@ -65,7 +65,7 @@ def rule_based_fibers(el, et, ec, alpha, beta):
     return normalize_vectors(fibers)
 
 
-def fiber_angles(distance_map, alpha_endo=-60, alpha_epi=60):
+def left_ventricle_fiber_angles(distance_map, alpha_endo=-60, alpha_epi=60):
     """Linearly interpolate fiber angles across the myocardial wall.
 
     Parameters
@@ -83,7 +83,7 @@ def fiber_angles(distance_map, alpha_endo=-60, alpha_epi=60):
     -------
     alpha : ndarray
         Interpolated angles with the same shape as distance_map and the
-        same units as the endpoint angles. No unit conversion is performed.
+        same units as the endpoint angles.
 
     Notes
     -----
@@ -106,5 +106,4 @@ def fiber_angles(distance_map, alpha_endo=-60, alpha_epi=60):
         raise ValueError("Fiber angles should be within [-90, 90] degrees.")
 
     alpha = distance_map * (alpha_epi - alpha_endo) + alpha_endo
-    alpha = np.radians(alpha)
     return alpha

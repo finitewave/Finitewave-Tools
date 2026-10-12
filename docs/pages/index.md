@@ -18,6 +18,7 @@ Prepare tissue geometry and bring simulation results into view.
 
 - [Plotting and animation](<Plot and Animation.ipynb>)
 - [Left ventricle fibers](<Left Ventricle Fibers.ipynb>)
+- [Phase-based initialization of reentry](<Phase-Based Initialization of Reentry.ipynb>)
 
 </div>
 

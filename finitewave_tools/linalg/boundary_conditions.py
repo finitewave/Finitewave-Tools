@@ -1,6 +1,4 @@
 import numpy as np
-from scipy.sparse.linalg import gmres
-import pyamg
 
 
 def make_system(A, b=None, x0=None, dirichlet_conditions=None):
@@ -59,35 +57,6 @@ def make_system(A, b=None, x0=None, dirichlet_conditions=None):
     return A_reduced, b_reduced, x0, interior_indices
 
 
-def linear_solver(A, b, x0=None, **kwargs):
-    """
-    Solve the linear system Ax = b using GMRES with an AMG preconditioner.
-
-    Parameters
-    ----------
-    A : scipy.sparse matrix
-        The stiffness matrix of the system.
-    b : numpy.ndarray
-        The right-hand side vector of the system.
-    x0 : numpy.ndarray, optional
-        The initial guess for the solution. Defaults to zero.
-    **kwargs
-        Additional keyword arguments to pass to the GMRES solver.
-
-    Returns
-    -------
-    x : numpy.ndarray
-        The solution vector.
-    """
-    ml = pyamg.smoothed_aggregation_solver(A)
-    M_preconditioner = ml.aspreconditioner()
-
-    x, info = gmres(A, b, M=M_preconditioner, x0=x0, **kwargs)
-    if info != 0:
-        raise RuntimeError(f"GMRES did not converge successfully (info={info}).")
-    return x
-
-
 def _find_interior_indices(size, boundary_indices):
     """
     Find the indices of the interior nodes (not on the Dirichlet boundary).
@@ -140,6 +109,7 @@ def _build_reduced_system(A, b, x, interior_indices, boundary_indices):
 
     return A_reduced, b_reduced
 
+
 def _set_dirichlet_values(x, dirichlet_conditions):
     """
     Apply Dirichlet boundary conditions to the solution vector.
@@ -173,3 +143,4 @@ def _set_dirichlet_values(x, dirichlet_conditions):
 @staticmethod
 def _has_unique_indices(indices):
     return np.unique(indices).size == indices.size
+

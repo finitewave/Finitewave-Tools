@@ -18,6 +18,7 @@ nav:
   - Mesh:
       - Plotting and animation: Plot and Animation.ipynb
       - Left ventricle fibers: Left Ventricle Fibers.ipynb
+      - Phase-based initialization of reentry: Phase-Based Initialization of Reentry.ipynb
   - Electrophysiology:
       - Spiral wave termination: Spiral Wave Termination.ipynb
       - Alternans and spiral breakup: Alternans and Spiral Breakup.ipynb
