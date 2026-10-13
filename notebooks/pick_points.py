@@ -13,8 +13,11 @@ import finitewave_tools.visualization as fwv
 # grid = fw.PyVistaMeshGrid.from_mesh(mesh)
 path = Path("/Users/arstanbekokenov/Projects/Finitewave-Tools/Tutorials/data")
 
-points = np.load(path / "atrial_points.npy")
-elems = np.load(path / "atrial_elems.npy")
+points = np.load(path / "atrial/points.npy")
+elems = np.load(path / "atrial/elems.npy")
+mv = np.load(path / "atrial/mv_ids.npy")
+lpv = np.load(path / "atrial/lpv_ids.npy")
+rpv = np.load(path / "atrial/rpv_ids.npy")
 
 grid = fwv.PyVistaSurfaceGrid(points, elems)
 
@@ -43,4 +46,7 @@ plotter.enable_point_picking(
     show_point=True,
     point_size=12,
 )
+plotter.add_points(points[mv], color="red", point_size=20, render_points_as_spheres=True, label="MV")
+plotter.add_points(points[lpv], color="blue", point_size=20, render_points_as_spheres=True, label="LPV")
+plotter.add_points(points[rpv], color="green", point_size=20, render_points_as_spheres=True, label="RPV")
 plotter.show()
