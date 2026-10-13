@@ -80,7 +80,8 @@ class Frame2DRenderer:
         return files, len(files)
 
     def render_frame(self, frame_index, clim=(0, 1), cmap="viridis",
-                     nan_color="black", output_mask=None, nan_mask=None):
+                     nan_color="black", output_mask=None, nan_mask=None,
+                     callback=None):
         """Render a single frame as an RGB array.
 
         Parameters
@@ -97,7 +98,10 @@ class Frame2DRenderer:
             Boolean array indicating which entries to restore from a packed frame.
         nan_mask : ndarray, optional
             Boolean array indicating which entries to mask as NaN.
-
+        callback : callable, optional
+            Function to call after rendering the frame. It should accept
+            two arguments: the RGB array and the frame index. It should return
+            the modified RGB array, which will be used for further processing.
         Returns
         -------
         ndarray
@@ -120,7 +124,12 @@ class Frame2DRenderer:
         if frame.shape != (self.height, self.width):
             raise ValueError("Frame shape must match the configured grid.")
 
-        return self._to_rgb(frame, clim, self.setup_cmap(cmap, nan_color))
+        rgb_frame = self._to_rgb(frame, clim, self.setup_cmap(cmap, nan_color))
+
+        if callback:
+            rgb_frame = callback(rgb_frame, frame_index)
+
+        return rgb_frame
 
     def render_all_frames(self, **kwargs):
         """Render all selected frames into a list of RGB arrays.
