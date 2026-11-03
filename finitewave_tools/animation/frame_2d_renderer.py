@@ -81,7 +81,7 @@ class Frame2DRenderer:
 
     def render_frame(self, frame_index, clim=(0, 1), cmap="viridis",
                      nan_color="black", output_mask=None, nan_mask=None,
-                     callback=None):
+                     clim_to_nan=True, callback=None):
         """Render a single frame as an RGB array.
 
         Parameters
@@ -98,6 +98,9 @@ class Frame2DRenderer:
             Boolean array indicating which entries to restore from a packed frame.
         nan_mask : ndarray, optional
             Boolean array indicating which entries to mask as NaN.
+        clim_to_nan : bool, optional
+            If True, values outside ``clim`` are set to NaN; otherwise,
+            they are clipped to the nearest limit.
         callback : callable, optional
             Function to call after rendering the frame. It should accept
             two arguments: the RGB array and the frame index. It should return
@@ -124,7 +127,7 @@ class Frame2DRenderer:
         if frame.shape != (self.height, self.width):
             raise ValueError("Frame shape must match the configured grid.")
 
-        rgb_frame = self._to_rgb(frame, clim, self.setup_cmap(cmap, nan_color))
+        rgb_frame = self._to_rgb(frame, clim, self.setup_cmap(cmap, nan_color), clim_to_nan)
 
         if callback:
             rgb_frame = callback(rgb_frame, frame_index)
@@ -241,7 +244,7 @@ class Frame2DRenderer:
 
         return frame
 
-    def _to_rgb(self, frame, clim, cmap):
+    def _to_rgb(self, frame, clim, cmap, clim_to_nan=True):
         limits = np.asarray(clim, dtype=float)
         
         if (limits.shape != (2,) or not np.all(np.isfinite(limits))
@@ -249,9 +252,16 @@ class Frame2DRenderer:
             raise ValueError("clim must contain two finite, increasing values.")
         
         frame = np.asarray(frame, dtype=float)
-        mask = ~np.isfinite(frame) | (frame < limits[0]) | (frame > limits[1])
         normalized = (frame - limits[0]) / (limits[1] - limits[0])
-        normalized[mask] = np.nan
+
+        if clim_to_nan:
+            normalized[frame < limits[0]] = np.nan
+            normalized[frame > limits[1]] = np.nan
+        else:
+            normalized[frame < limits[0]] = 0.0
+            normalized[frame > limits[1]] = 1.0
+
+        normalized[~np.isfinite(frame)] = np.nan
         return cmap(normalized, bytes=True)[:, :, :3].copy()
 
     def finalize(self):

@@ -199,7 +199,9 @@ def geodesic_coords(K, M, G, elems, elem_sizes, normals, source_inds,
     LogMap: Geodesic Polar Coordinates Parameterization with the Magnetic Laplacian.
     Paper: https://doi.org/10.48550/arXiv.2609.10503
     """
-    radial_vec = geodesic_direction(K, M, G, elems, source_inds)
+    radial_vec = geodesic_direction(
+        K, M, G, elems, source_inds, t=t, atol=atol, maxiter=maxiter
+    )
     circ_vec = np.cross(radial_vec, normals)
     circ_vec /= np.linalg.norm(circ_vec, keepdims=True, axis=1)
     geod_dist = geodesic_distance(K, M, G, elems, elem_sizes, source_inds,
